@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset=utf-8 />
+<title>Perceptual Circle Scaling</title>
+<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+<style>
+body {
+margin:0;
+padding:0;
+font-family:
+sans-serif;
+}
+h1 {
+position: absolute;
+left: 50px;
+top: 10px;
+padding: 8px 2%;
+margin: 0;
+background: #ffff80;
+box-shadow: 0 0 15px rgba(0,0,0,0.2);
+border-radius: 3px;
+color: peru;
+font-size: 1.9em;
+z-index: 800;
+}
+#map {
+position:absolute;
+top:0;
+bottom:0;
+width:1350px;
+height: 700px;
+}
+section {
+    position: absolute;
+    bottom: 0;
+    left: 10px;
+    width: 280px;
+    margin: 20px auto;
+    padding: 0 15px;
+    background: #ffff80;
+    border: 1px solid grey;
+    border-radius: 3px;
+    z-index: 800;
+  }
+
+  p {
+    font-size: .9em;
+    line-height: 1.5em;
+  }
+
+  a {
+    color: #005daa;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+
+		a:hover {
+			text-decoration: underline;
+		}
+</style>
+</head>
+<body>
+<div id='map'></div>
+<h1>Marking time in the Valley of the Kings
+			<img src="https://upload.wikimedia.org/wikipedia/commons/f/fe/Flag_of_Egypt.svg" alt="Flag of Egypt.svg" width="45" height="30"></h1>
+<section>
+  <h2>Pyramids, Tombs and Ancient Artifacts</h2>
+  <p>In 2013, one of the worlds oldest sundials was discovered by an archeological team led by Professor Susanne Bickel from the University of Basel. The discovery took place in Egypt's Nile River Valley and dates back to the 13th century B.C.  <a href="https://www.livescience.com/28057-ancient-egyptian-sundial-discovered.html">LIVESCIENCE</a>. Made from a flattened piece of limestone the sundials design is a black semicircle divided into 12 sections.  The object is thought to have been used to visualize the length of hours. </p>
+  <h2>Legend</h2>
+  <p>O = Pyramid </p>
+
+
+
+  <p>Map author, Chris Caudill</p>
+</section>
+
+<script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/2.1.0/leaflet.ajax.min.js"></script>
+<script>
+console.log("hello world!");
+
+var options = {
+			center: [25.74063, 32.60155],
+			zoom: 6
+		}
+		var map = L.map('map', options);
+
+		var tiles = L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', {
+			attribution: 'Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community',
+			subdomains: 'abcd',
+			maxZoom: 19
+		}).addTo(map);
+    pyramid = L.geoJson.ajax("assets/pyramid.geojson", {
+    				attribution: 'Data: kaggle',
+            pointToLayer: function (feature, x){
+    return L.circleMarker(x, {
+    color:'#1a0600',
+   opacity: 1,
+    weight: 3,
+    fillColor: '#ff4000',
+    fillOpacity: .0,
+    radius: 8
+    }) }});
+    pyramid.addTo(map);
+
+</script>
+</body>
+</html
